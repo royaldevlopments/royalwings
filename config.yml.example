@@ -1,0 +1,30 @@
+token: "your_wings_token_here"
+
+panel:
+  url: "https://your-panel.com"
+  token: "your_panel_api_token_here"
+
+system:
+  http: "0.0.0.0:8080"
+  host: "0.0.0.0"
+  timezone: "UTC"
+  tmp_dir: "/tmp/royalwings"
+
+docker:
+  socket: "/var/run/docker.sock"
+  network: "royalwings"
+  domain: ""
+
+sftp:
+  address: "0.0.0.0"
+  port: 2022
+
+activity:
+  log_file: "/var/lib/royalwings/activity.log"
+
+backups:
+  directory: "/var/lib/royalwings/backups"
+  write_limit: 5368709120
+
+data: "/var/lib/royalwings"
+debug: false
