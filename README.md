@@ -1,33 +1,61 @@
-<p align="center">
-<a href="https://royalwings.local/">
-<img width="870" height="286" alt="image" src="https://github.com/user-attachments/assets/b45d6051-a275-46d2-a29e-11ae2237c24e" />
-</a>
-</p>
+# RoyalWings
 
-# RoyalWings Agent
- ![CalVer Badge](https://img.shields.io/badge/calver-YY.MM.MICRO-22bfda)
-[![Go Report Card](https://goreportcard.com/badge/github.com/royalwings)](https://goreportcard.com/report/github.com/royalwings)
+Game server control daemon for [Royal Panel](https://github.com/royaldevlopments/panel). Manages Docker containers, server lifecycle, file uploads, backups, and WebSocket streams via a HTTP API.
 
-Agent is RoyalWings's server control plane, built for the rapidly changing gaming industry and designed to be
-highly performant and secure. Agent provides an HTTP API allowing you to interface directly with running server
-instances, fetch server logs, generate backups, and control all aspects of the server lifecycle.
+## Features
 
-In addition, Agent ships with a built-in SFTP server allowing your system to remain free of RoyalWings specific
-dependencies, and allowing users to authenticate with the same credentials they would normally use to access the Panel.
+- **Server Management** — Create, start, stop, restart, and delete game servers
+- **Docker Integration** — Isolated containers with resource limits (CPU, memory, disk)
+- **Installation Scripts** — Automated server setup via Panel-defined egg configurations
+- **SFTP Server** — Built-in SFTP for file transfers, authenticates via Panel
+- **WebSocket Console** — Real-time server console output and command input
+- **Backup & Transfer** — Server backups and cross-node transfers
+- **File Management** — Browse, upload, download, edit server files
+- **Crash Detection** — Automatic restart with configurable timeout
+- **Resource Monitoring** — CPU, memory, disk usage tracking per server
 
-## Sponsors
+## Requirements
 
-I would like to extend my sincere thanks to the following sponsors for helping fund RoyalWings's development.
-[Interested in becoming a sponsor?](https://github.com/sponsors/royalwings)
+- Linux (x86_64 or arm64)
+- Docker
+- Royal Panel instance
 
-|                      **Company**                      |                                                                          **About**                                                                         |
-|:-----------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|       [**Tietokettu**](https://tietokettu.net/)       | Tietokettu is a company that provides network and server services founded in 2019. Our goal is to create affordable and functional solutions for old ones. |
-| [**CloudExa-Hosting**](https://cloudexa-hosting.com/) |   CloudExa Provides fast, reliable cloud hosting built for gaming, delivering smooth performance and scalable solutions for game servers and enterprises.  |
+## Quick Start
 
+```bash
+# Install binary
+sudo cp royalwings /usr/local/bin/
 
-## Reporting Issues
+# Create config
+sudo mkdir -p /etc/royalwings
+sudo royalwings configure --panel https://panel.example.com
 
-Please use the [royalwings/panel](https://github.com/royalwings/panel) repository to report any issues or make
-feature requests for Agent. In addition, the [security policy](https://github.com/royalwings/panel/security/policy) listed
-within that repository also applies to Agent.
+# Start service
+sudo systemctl enable --now royalwings
+```
+
+## Configuration
+
+Config file: `/etc/royalwings/config.yml`
+
+Key settings:
+- `token_id` / `token` — Authentication credentials from Panel node settings
+- `remote` — Panel URL
+- `api.host` / `api.port` — Daemon listen address (use `127.0.0.1:8080` behind nginx)
+- `docker.network` — Docker network settings for containers
+
+## API
+
+All API endpoints require `Authorization: Bearer <token>` header.
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `/api/system` | GET | System information |
+| `/api/servers` | GET | List all servers |
+| `/api/servers` | POST | Create a new server |
+| `/api/servers/:uuid/power` | POST | Send power action (start/stop/restart/kill) |
+| `/api/servers/:uuid/ws` | GET | WebSocket console |
+
+## License
+
+MIT
