@@ -1,5 +1,11 @@
 # RoyalWings
 
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0-blue.svg" alt="Version">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/badge/go-%3E%3D1.21-00ADD8.svg" alt="Go">
+</p>
+
 Game server control daemon by **Shaurya** / **RoyalDevlopments**.
 
 Manages Docker containers, server lifecycle, file uploads, backups, and WebSocket streams via a HTTP API.
