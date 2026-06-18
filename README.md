@@ -1,6 +1,8 @@
 # RoyalWings
 
-Game server control daemon for [Royal Panel](https://github.com/royaldevlopments/panel). Manages Docker containers, server lifecycle, file uploads, backups, and WebSocket streams via a HTTP API.
+Game server control daemon by **Shaurya** / **RoyalDevlopments**.
+
+Manages Docker containers, server lifecycle, file uploads, backups, and WebSocket streams via a HTTP API.
 
 ## Features
 
@@ -58,4 +60,4 @@ All API endpoints require `Authorization: Bearer <token>` header.
 
 ## License
 
-MIT
+MIT — © 2026 Shaurya / RoyalDevlopments
